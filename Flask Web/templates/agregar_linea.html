@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block titulo %}
+<h1>Agregar Linea Recorrida</h1>
+<br>
+{% endblock %}
+
+{% block cuerpo %}
+<form action="{{ url_for('agregar_exito') }}" method="POST">
+
+      <label for="linea"><strong>Lineas</strong></label>
+      <select name="linea">
+      	{% for i in unidas %}
+        <option value="{{ i }}">{{ i }}</option>
+        {% endfor %}
+      </select>
+      <input type="submit" value="Submit">
+    </form>
+
+{% endblock %}
