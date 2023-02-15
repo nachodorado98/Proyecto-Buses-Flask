@@ -29,9 +29,19 @@ class ConsultaBuses():
 									SET Recorrida=1
 									WHERE Linea=%s""",
 									(linea,))
+		
 		ConsultaBuses.bbdd.commit()
-
 		return True
+
+	@staticmethod
+	def detalle_linea(linea):
+		ConsultaBuses.c.execute("""USE autobuses""")
+		ConsultaBuses.c.execute("""SELECT Inicio, Fin, Tipo, FechaInicio, FechaFin
+									FROM lineas 
+									WHERE Linea=%s""",
+									(linea,))
+		
+		return ConsultaBuses.c.fetchone()
 
 
 

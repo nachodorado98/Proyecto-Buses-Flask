@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block pestana %}
+Detalle Linea {{ linea }}
+{% endblock pestana %}
+{% block titulo %}
+Detalle Línea {{ linea }}
+{% endblock %}
+
+{% block cuerpo %}
+<br>
+<ul class="list-group">
+  <li class="list-group-item">{{ inicio }} - {{ fin }}</li>
+  <li class="list-group-item">Fecha Inaguración:&emsp;{{ fecha_inicio }}</li>
+  <li class="list-group-item">Fecha Fín:&emsp;{{ fecha_fin }}</li>
+  <li class="list-group-item">Tipo de Línea:&emsp;{{ tipo }}</li>
+  <li class="list-group-item">
+    <div class="boton-recorrido">
+      <a href="#" role="button" class="btn btn-outline-secondary">Ver Recorrido</a>
+    </div>
+  </li>
+</ul>
+<br>
+<div class="boton-volver">
+  <a href="{{ url_for('inicio') }}", role="button" class="btn btn-primary">Volver a las Líneas</a></td>
+</div>
+{% endblock %}

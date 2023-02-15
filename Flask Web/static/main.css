@@ -1,0 +1,133 @@
+.navbar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 60px;
+	background-color: #333;
+	color: white;
+	padding: 0 20px;
+}
+
+.navbar a {
+	color: white;
+	text-decoration: none;
+	font-size: 20px;
+	margin-right: 20px;
+}
+
+.navbar a:hover {
+	background-color: #ddd;
+	color: black;
+	padding: 10px 15px;
+	border-radius: 5px;
+}
+
+table {
+	width: 80%;
+	margin: 20px auto;
+	border-collapse: collapse;
+	border: 1px solid #ccc;
+}
+
+th, td {
+	border: 1px solid #ddd;
+	padding: 12px;
+	text-align: center;
+	font-size: 23px;
+}
+
+th {
+	background-color: #ddd;
+}
+
+tr:hover {
+	background-color: #f2f2f2;
+}
+
+.boton a {
+	color: white;
+	font-size: 30px;
+	margin-right: 20px;
+}
+
+.boton a:hover {
+	background-color: #ddd;
+	color: black;
+	padding: 10px 15px;
+	border-radius: 5px;
+}
+
+h1 {
+	font-size: 75px;
+}
+
+form {
+	width: 50%;
+	margin: 20px auto;
+	padding: 20px;
+	background-color: #f2f2f2;
+	border-radius: 10px;
+}
+
+label {
+	width: 100%;
+	padding: 12px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	box-sizing: border-box;
+	border-radius: 5px;
+	font-size: 45px;
+}
+
+input, select {
+	width: 100%;
+	padding: 12px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	box-sizing: border-box;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	font-size: 20px;
+	text-align: center;
+}
+
+input[type="submit"] {
+	background-color: #4CAF50;
+	color: white;
+	padding: 12px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+input[type="submit"]:hover {
+	background-color: #3e8e41;
+}
+
+.list-group {
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: #ddd;
+  width: 800px;
+}
+
+.list-group-item {
+  display: block;
+  padding: 10px 15px;
+  color: #333;
+  border-bottom: 1px solid #ddd;
+  font-size: 35px;
+}
+
+.list-group-item:hover {
+  background-color: #ddd;
+  color: #000;
+}
+
+.boton-volver a{
+	font-size: 20px;
+}
+
+.boton-recorrido a{
+	font-size: 20px;
+
+}

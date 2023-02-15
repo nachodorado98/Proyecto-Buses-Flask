@@ -2,6 +2,8 @@
 from flask import Flask, render_template, url_for, request, redirect
 #Importamos la clase ConsultaBuses para hacer las consultas
 from consultas_bbdd import ConsultaBuses
+from datetime import datetime
+import datetime
 
 #Creamos la aplicacion
 app=Flask(__name__)
@@ -17,7 +19,7 @@ def inicio():
 	return render_template("base.html", lineas_recorridas=lineas_recorridas)
 
 #Funcion para la pagina de agregar una nueva linea recorrida
-@app.route("/agregarlinea", methods=["GET", "POST"])
+@app.route("/agregarlinea/", methods=["GET", "POST"])
 def agregar_linea():
 
 	#Obtenemos las lineas no recorridas llamando a la funcion lineas
@@ -31,7 +33,7 @@ def agregar_linea():
 
 
 #Funcion para agregar la linea nueva
-@app.route("/agregarexito", methods=["GET", "POST"])
+@app.route("/agregarexito/", methods=["GET", "POST"])
 def agregar_exito():
 
 	#Obtenemos el numero de la linea que se quiere agregar
@@ -43,6 +45,29 @@ def agregar_exito():
 	#Redireccionamos a la pagina de inicio
 	return redirect(url_for("inicio"))
 
+
+@app.route("/detallelinea<linea>/", methods=["GET", "POST"])
+def detalle_linea(linea):
+
+	detalle_linea=ConsultaBuses.detalle_linea(linea)
+
+	inicio=detalle_linea[0]
+	fin=detalle_linea[1]
+	tipo=detalle_linea[2]
+	fecha_inicio=detalle_linea[3].strftime("%d-%m-%Y")
+
+	if detalle_linea[4]>datetime.date.today():
+		fecha_fin="En Activo"
+	else:
+		fecha_fin=detalle_linea[4].strftime("%d-%m-%Y")
+
+	return render_template("detalle_linea.html", 
+							linea=linea, 
+							inicio=inicio, 
+							fin=fin,
+							tipo=tipo,
+							fecha_inicio=fecha_inicio,
+							fecha_fin=fecha_fin)
 
 #Si cumple la condicion entra y corre la aplicacion
 if __name__=="__main__":
