@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block pestana %}
+Seleccionar Parada
+{% endblock pestana %}
+{% block titulo %}
+Seleccionar Parada Favorita
+{% endblock titulo %}
+{% block cuerpo %}
+<form action="{{ url_for('parada_exito', linea=linea) }}" method="POST">
+      <label for="parada"><strong>Elige Una De Las Paradas</strong></label>
+      <select name="parada">
+      	{% for i in paradas_linea %}
+        <option value="{{ i.0 }}">Parada: {{ i.1 }}&emsp;Nombre: {{ i.2 }}&emsp;Sentido: {{ i.3 }}</option>
+        {% endfor %}
+      </select>
+      <input type="submit" value="Submit">
+    </form>
+
+{% endblock cuerpo %}

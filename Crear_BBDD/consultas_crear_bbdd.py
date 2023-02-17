@@ -63,4 +63,5 @@ class Registros():
 		for i in lista_paradas:
 			i[0]=i[0]+1
 			i[3]=str(i[3])
+			i.append(0)
 		return lista_paradas

@@ -4,7 +4,7 @@ Detalle Linea {{ linea }}
 {% endblock pestana %}
 {% block titulo %}
 Detalle Línea {{ linea }}
-{% endblock %}
+{% endblock titulo %}
 
 {% block cuerpo %}
 <br>
@@ -18,9 +18,14 @@ Detalle Línea {{ linea }}
       <a href="#" role="button" class="btn btn-outline-secondary">Ver Recorrido</a>
     </div>
   </li>
+  <li class="list-group-item">
+    <div class="boton-paradas">
+      <a href="{{ url_for('seleccionar_parada', linea=linea) }}" role="button" class="btn btn-outline-secondary">Seleccionar Paradas Favoritas</a>
+    </div>
+  </li>
 </ul>
 <br>
 <div class="boton-volver">
   <a href="{{ url_for('inicio') }}", role="button" class="btn btn-primary">Volver a las Líneas</a></td>
 </div>
-{% endblock %}
+{% endblock cuerpo %}

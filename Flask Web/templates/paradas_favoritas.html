@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block pestana %}
+Paradas favoritas
+{% endblock pestana %}
+{% block titulo %}
+Paradas Favoritas
+{% endblock %}
+
+{% block cuerpo %}
+{% if favoritas==[] %}
+<h2>No hay ninguna favorita añadida aún...</h2>
+<br>
+<div class="boton">
+  <a href="{{ url_for('inicio') }}" role="button"class="btn btn-secondary">Volver a las lineas</a>
+</div>
+{% else %}
+<table>
+      <thead>
+      <tr>
+        <th>Parada</th>
+        <th>Línea</th>
+        <th>Sentido</th>
+        <th>Mapa</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for i in favoritas %}
+      <tr>
+        <td>{{ i.0 }}</td>
+        <td>{{ i.1 }}</td>
+        <td>{{ i.2 }}</td>
+        <td><a href="#", role="button" class="btn btn-outline-secondary">Ver Mapa</a></td>
+      </tr>
+      {% endfor %}
+      
+    </tbody>
+    </table>
+{% endif %}
+{% endblock cuerpo %}

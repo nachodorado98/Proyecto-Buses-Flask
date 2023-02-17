@@ -39,28 +39,31 @@ def agregar_exito():
 	#Obtenemos el numero de la linea que se quiere agregar
 	linea=request.form.get("linea").split(" ")[1]
 
-	#Agregamos (actualizamos) la linea
+	#Agregamos (actualizamos) la linea llamando a actualizar_linea
 	ConsultaBuses.actualizar_linea(linea)
 
 	#Redireccionamos a la pagina de inicio
 	return redirect(url_for("inicio"))
 
-
+#Funcion para obtener el detalle de una linea
 @app.route("/detallelinea<linea>/", methods=["GET", "POST"])
 def detalle_linea(linea):
 
+	#Obtenemos el detalle de la linea llamando a detalle_linea
 	detalle_linea=ConsultaBuses.detalle_linea(linea)
-
 	inicio=detalle_linea[0]
 	fin=detalle_linea[1]
 	tipo=detalle_linea[2]
 	fecha_inicio=detalle_linea[3].strftime("%d-%m-%Y")
 
+	#Si la fecha de fin es mayor a la actual ponemos que esta en activo
 	if detalle_linea[4]>datetime.date.today():
 		fecha_fin="En Activo"
+	#Si es menor ponemos la fecha de fin
 	else:
 		fecha_fin=detalle_linea[4].strftime("%d-%m-%Y")
 
+	#Devolvemos el template del detalle de la linea con los datos necesarios
 	return render_template("detalle_linea.html", 
 							linea=linea, 
 							inicio=inicio, 
@@ -68,6 +71,40 @@ def detalle_linea(linea):
 							tipo=tipo,
 							fecha_inicio=fecha_inicio,
 							fecha_fin=fecha_fin)
+
+#Funcion para selccionar una parada como favorita
+@app.route("/detallelinea<linea>/seleccionarparada/", methods=["GET", "POST"])
+def seleccionar_parada(linea):
+
+	#Obtenemos las paradas que no son favoritas
+	paradas_linea=ConsultaBuses.paradas_linea(linea)
+
+	#Devolvemos el template de la selccion de la parada como favorita
+	return render_template("seleccionar_parada.html", linea=linea, paradas_linea=paradas_linea)
+
+
+#Funcion para agregar la parada como favorita
+@app.route("/detallelinea<linea>/seleccionarparada/exito/", methods=["GET", "POST"])
+def parada_exito(linea):
+
+	#Obtenemos el codigo de la parada seleccionada
+	codigo_parada=request.form.get("parada")
+
+	#Agregamos (actualizamos) la parada
+	ConsultaBuses.actualizar_parada_favorita(codigo_parada)
+
+	#Redireccionamos a la pagina de inicio
+	return redirect(url_for("inicio"))
+
+#Funcion para la pagina de visualizar las paradas favoritas
+@app.route("/paradasfavoritas/")
+def paradas_favoritas():
+
+	#Obtenemos las paradas favoritas en orden de linea y sentido
+	favoritas=ConsultaBuses.paradas_favoritas_orden()
+
+	#Devolvemos el template de las paradas favoritas y le pasamos las paradas
+	return render_template("paradas_favoritas.html", favoritas=favoritas)
 
 #Si cumple la condicion entra y corre la aplicacion
 if __name__=="__main__":

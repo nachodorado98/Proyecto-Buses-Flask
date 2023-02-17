@@ -44,11 +44,12 @@ consulta_tabla_paradas="""CREATE TABLE paradas
 						Sentido VARCHAR(20),
 						Latitud FLOAT,
 						Longitud FLOAT,
+						Favorita BOOl DEFAULT 0,
 						PRIMARY KEY (CodParada),
 						FOREIGN KEY (Linea) REFERENCES lineas (Linea) ON DELETE CASCADE)"""
 creacion_tabla_paradas=tabla_paradas.crear_tabla(consulta_tabla_paradas)
 
 consulta_insertar_paradas="""INSERT INTO paradas
-						VALUES(%s, %s, %s, %s, %s, %s, %s)"""
+						VALUES(%s, %s, %s, %s, %s, %s, %s, %s)"""
 archivo_paradas=os.path.join(os.path.abspath(os.getcwd()), r"Limpiar Tablas\paradas_buses")
 insertar_tabla_paradas=tabla_paradas.insertar_datos(consulta_insertar_paradas, Registros.csv_lista_paradas(archivo_paradas))
