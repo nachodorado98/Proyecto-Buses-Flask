@@ -4,9 +4,12 @@ from flask import Flask, render_template, url_for, request, redirect
 from consultas_bbdd import ConsultaBuses
 from datetime import datetime
 import datetime
+import folium
+import os
 
 #Creamos la aplicacion
 app=Flask(__name__)
+
 
 #Funcion para la pagina de inicio
 @app.route("/")
@@ -105,6 +108,19 @@ def paradas_favoritas():
 
 	#Devolvemos el template de las paradas favoritas y le pasamos las paradas
 	return render_template("paradas_favoritas.html", favoritas=favoritas)
+
+@app.route("/paradasfavoritas/parada<parada>mapa")
+def mapa(parada):
+
+	latlong=ConsultaBuses.lat_long(parada)
+
+	mapa=folium.Map(location=[latlong[0], latlong[1],], zoom_start=15)
+	#Creamos el marcador de la ubicacion del desplazamiento (estadio) y un mensaje emergente con la fecha utilizando etiquetas HTML
+	folium.Marker([latlong[0], latlong[1]], popup=folium.Popup(f"hola", max_width=500)).add_to(mapa)
+    #Guardamos el mapa como un template mas
+	mapa.save(os.path.join(os.getcwd(),"templates\mapa.html"))
+	return render_template("mapa_parada.html")
+
 
 #Si cumple la condicion entra y corre la aplicacion
 if __name__=="__main__":

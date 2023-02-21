@@ -76,12 +76,24 @@ class ConsultaBuses():
 	@staticmethod
 	def paradas_favoritas_orden():
 		ConsultaBuses.c.execute("""USE autobuses""")
-		ConsultaBuses.c.execute("""SELECT Parada, Linea, Sentido, Latitud, Longitud
+		ConsultaBuses.c.execute("""SELECT Parada, Nombre, Linea, Sentido
 									FROM paradas
 									WHERE Favorita=1
 									ORDER BY Linea, Sentido""")
 		
 		return ConsultaBuses.c.fetchall()
+
+	@staticmethod
+	def lat_long(parada):
+		ConsultaBuses.c.execute("""USE autobuses""")
+		ConsultaBuses.c.execute("""SELECT Latitud, Longitud
+									FROM paradas
+									WHERE Parada=%s
+									LIMIT 1""",
+									(parada,))
+		
+		return ConsultaBuses.c.fetchone()
+
 
 
 

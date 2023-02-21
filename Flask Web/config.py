@@ -9,5 +9,5 @@ class Config():
 		#Creamos la conexion con mysql
 		bbdd=mysql.connector.connect(host="localhost", user="root", passwd="root")
 		#Creamos un cursor
-		c=bbdd.cursor()
+		c=bbdd.cursor(buffered=True)
 		return bbdd, c 

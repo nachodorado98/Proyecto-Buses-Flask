@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% block pestana %}
-Paradas favoritas
+Paradas Favoritas
 {% endblock pestana %}
 {% block titulo %}
 Paradas Favoritas
-{% endblock %}
+{% endblock titulo %}
 
 {% block cuerpo %}
 {% if favoritas==[] %}
@@ -26,10 +26,10 @@ Paradas Favoritas
       <tbody>
       {% for i in favoritas %}
       <tr>
-        <td>{{ i.0 }}</td>
         <td>{{ i.1 }}</td>
         <td>{{ i.2 }}</td>
-        <td><a href="#", role="button" class="btn btn-outline-secondary">Ver Mapa</a></td>
+        <td>{{ i.3 }}</td>
+        <td><a href="{{ url_for('mapa', parada=i.0) }}", role="button" class="btn btn-outline-secondary">Ver Mapa</a></td>
       </tr>
       {% endfor %}
       
